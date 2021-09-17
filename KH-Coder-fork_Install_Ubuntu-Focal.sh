@@ -67,8 +67,7 @@ sudo echo "local_infile   = ON" >> /etc/mysql/mysql.cnf
 # This will download a preconfigured 'mysqld.cnf' file with increased memory values and use it to overwrite the default configuration file.
 
 cd ~/                                                                        # Just in case you're not already in your home directory.
-wget https://x0.at/7BLz.cnf
-mv 7BLz.cnf mysqld.cnf
+wget https://raw.githubusercontent.com/TheFungineer/khcoder-resources/main/mysqld.cnf
 sudo cp mysqld.cnf /etc/mysql/mysql.conf.d/mysqld.cnf
 sudo service mysql restart
 
