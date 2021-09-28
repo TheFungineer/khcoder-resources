@@ -91,8 +91,8 @@ wget http://launchpadlibrarian.net/226687722/libgoocanvas3_1.0.0-1_amd64.deb
 wget http://archive.ubuntu.com/ubuntu/pool/universe/libg/libgtk2-ex-podviewer-perl/libgtk2-ex-podviewer-perl_0.18-1_all.deb
 wget http://archive.ubuntu.com/ubuntu/pool/universe/libg/libgtk2-ex-simple-list-perl/libgtk2-ex-simple-list-perl_0.50-2_all.deb
 wget http://archive.ubuntu.com/ubuntu/pool/universe/g/gtkimageview/libgtkimageview0_1.6.4+dfsg-2_amd64.deb
-sudo dpkg -i libgtk2-ex-podviewer-perl_0.18-1_all.deb
 sudo dpkg -i libgtk2-ex-simple-list-perl_0.50-2_all.deb
+sudo dpkg -i libgtk2-ex-podviewer-perl_0.18-1_all.deb
 sudo dpkg -i libgtkimageview0_1.6.4+dfsg-2_amd64.deb
 sudo dpkg -i libgoocanvas-common_1.0.0-1_all.deb
 sudo dpkg -i libgoocanvas3_1.0.0-1_amd64.deb
