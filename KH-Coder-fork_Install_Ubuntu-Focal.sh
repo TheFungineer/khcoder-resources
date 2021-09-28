@@ -86,7 +86,7 @@ sudo apt -y install libperl5.30 libalgorithm-c3-perl libalgorithm-diff-perl liba
 
 # STEP 6: INSTALL OLDER LIBRARIES FROM .DEB PACKAGES (I HONESTLY DON'T KNOW WHICH ONES AMONG THESE, IF ANY, ARE TRULY NECESSARY)
 
-# This will download and install six older packages, then delete them.
+# This will download and install five older packages, then delete them.
 
 wget http://launchpadlibrarian.net/226687719/libgoocanvas-common_1.0.0-1_all.deb
 wget http://launchpadlibrarian.net/226687722/libgoocanvas3_1.0.0-1_amd64.deb
