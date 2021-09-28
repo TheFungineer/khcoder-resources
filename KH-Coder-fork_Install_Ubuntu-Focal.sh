@@ -77,6 +77,7 @@ fi
 cd ~/                                                                        # Just in case you're not already in your home directory.
 wget https://raw.githubusercontent.com/TheFungineer/khcoder-resources/main/mysqld.cnf
 sudo cp mysqld.cnf /etc/mysql/mysql.conf.d/mysqld.cnf
+rm -f mysqld.cnf
 sudo service mysql restart
 
 # STEP 5: INSTALL VARIOUS USEFUL PERL LIBRARIES
