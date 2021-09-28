@@ -41,7 +41,7 @@ sudo apt -y install perl perl-base perl-modules-5.30 perl-tk perl-doc
 # STEP 2: INSTALL DEPENDENCIES FOR GNU R, THEN ADD A REPOSITORY WITH THE LATEST VERSION, AND FINALLY INSTALL R WITH -DEV PACKAGES
 
 sudo apt -y install dirmngr gnupg apt-transport-https ca-certificates software-properties-common wget
-sudo apt-key adv --keyserver keyserver.ubuntu.com --recv-keys E298A3A825C0D65DFD57CBB651716619E084DAB9
+wget -qO- https://cloud.r-project.org/bin/linux/ubuntu/marutter_pubkey.asc | sudo tee -a /etc/apt/trusted.gpg.d/cran_ubuntu_key.asc
 sudo add-apt-repository -y 'deb https://cloud.r-project.org/bin/linux/ubuntu focal-cran40/'
 sudo apt -y install r-base r-base-dev
 
