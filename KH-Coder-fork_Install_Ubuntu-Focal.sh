@@ -23,6 +23,7 @@
 
 read -e -p "Enter the path to the directory where you wish to install KH Coder`echo $'\n(default is ~/Downloads): '`" -i "$HOME/Downloads" PATH_KHC
 echo KH Coder will be installed in: $PATH_KHC
+mkdir -p $PATH_KHC
 
 # PREPARATORY STEP B: DEFINE THE $PASSWORD VARIABLE
 
