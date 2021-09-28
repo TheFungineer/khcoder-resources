@@ -208,4 +208,6 @@ rm -f stanford-postagger-2016-10-31.zip
 export DBUSER=root DBPASSWORD=$PASSWORD PATH_KHC=$PATH_KHC
 sed "s|%%DB_USER%%|$DBUSER|g;s|%%DB_PASSWORD%%|$DBPASSWORD|g;s|%%PATH_KHC%%|$PATH_KHC|g" $PATH_KHC/khcoder/config/coder.ini.template.en > $PATH_KHC/khcoder/config/coder.ini
 
+cd khcoder
+
 echo $'\n*** Installation complete! ***\n\nYou may now launch KH Coder with the command "sudo perl kh_coder.pl". \n(You must be in KH Coder\'s installation directory, as you are now.)\n'
