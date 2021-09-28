@@ -39,8 +39,8 @@ sudo apt -y install perl perl-base perl-modules-5.30 perl-tk perl-doc
 
 # STEP 2: INSTALL DEPENDENCIES FOR GNU R, THEN ADD A REPOSITORY WITH THE LATEST VERSION, AND FINALLY INSTALL R WITH -DEV PACKAGES
 
-sudo apt -y install dirmngr gnupg apt-transport-https ca-certificates software-properties-common
-sudo apt -y-key adv --keyserver keyserver.ubuntu.com --recv-keys E298A3A825C0D65DFD57CBB651716619E084DAB9
+sudo apt -y install dirmngr gnupg apt-transport-https ca-certificates software-properties-common wget
+sudo apt-key adv --keyserver keyserver.ubuntu.com --recv-keys E298A3A825C0D65DFD57CBB651716619E084DAB9
 sudo add-apt-repository -y 'deb https://cloud.r-project.org/bin/linux/ubuntu focal-cran40/'
 sudo apt -y install r-base r-base-dev
 
@@ -55,12 +55,19 @@ sudo apt -y install default-mysql-client mysql-common mysql-server libmysqlclien
 sudo mysql -e "ALTER USER 'root'@'localhost' IDENTIFIED BY '$PASSWORD';"     # This will set the MySQL root password that was previously chosen.
 
 # STEP 4.2: SET APPROPRIATE GLOBAL SETTINGS FOR MYSQL
-
-sudo echo "" >> /etc/mysql/mysql.cnf
-sudo echo "[mysqld]" >> /etc/mysql/mysql.cnf
-sudo echo "" >> /etc/mysql/mysql.cnf
-sudo echo "sql_mode       = \"STRICT_TRANS_TABLES,NO_ZERO_IN_DATE,NO_ZERO_DATE,ERROR_FOR_DIVISION_BY_ZERO,NO_ENGINE_SUBSTITUTION\"" >> /etc/mysql/mysql.cnf
-sudo echo "local_infile   = ON" >> /etc/mysql/mysql.cnf
+declare file="/etc/mysql/mysql.cnf"
+declare regex="\s+sql_mode\s+"
+declare file_content=$( cat "${file}" )
+if [[ " $file_content " =~ $regex ]] # please note the space before and after the file content
+then
+    echo "Skipping setting mysql.cnf"
+else
+    echo "" | sudo tee -a /etc/mysql/mysql.cnf
+    echo "[mysqld]" | sudo tee -a /etc/mysql/mysql.cnf
+    echo "" | sudo tee -a /etc/mysql/mysql.cnf
+    echo "sql_mode       = \"STRICT_TRANS_TABLES,NO_ZERO_IN_DATE,NO_ZERO_DATE,ERROR_FOR_DIVISION_BY_ZERO,NO_ENGINE_SUBSTITUTION\"" | sudo tee -a /etc/mysql/mysql.cnf
+    echo "local_infile   = ON" | sudo tee -a /etc/mysql/mysql.cnf
+fi
 
 # STEP 4.3: CONFIGURE THE MYSQL DAEMON'S MEMORY SETTINGS, THEN RESTART MYSQL
 
@@ -79,24 +86,24 @@ sudo apt -y install libperl5.30 libalgorithm-c3-perl libalgorithm-diff-perl liba
 
 # This will download and install six older packages, then delete them.
 
-wget http://launchpadlibrarian.net/146288726/libgdal1-dev_1.9.0-3.1ubuntu4_all.deb
-wget http://launchpadlibrarian.net/226687719/libgoocanvas-common_1.0.0-1_all.deb
-wget http://launchpadlibrarian.net/226687722/libgoocanvas3_1.0.0-1_amd64.deb
-wget http://archive.ubuntu.com/ubuntu/pool/universe/libg/libgtk2-ex-podviewer-perl/libgtk2-ex-podviewer-perl_0.18-1_all.deb
-wget http://archive.ubuntu.com/ubuntu/pool/universe/libg/libgtk2-ex-simple-list-perl/libgtk2-ex-simple-list-perl_0.50-2_all.deb
-wget http://archive.ubuntu.com/ubuntu/pool/universe/g/gtkimageview/libgtkimageview0_1.6.4+dfsg-2_amd64.deb
-sudo dpkg -i libgdal1-dev_1.9.0-3.1ubuntu4_all.deb
-sudo dpkg -i libgoocanvas-common_1.0.0-1_all.deb
-sudo dpkg -i libgoocanvas3_1.0.0-1_amd64.deb
-sudo dpkg -i libgtk2-ex-podviewer-perl_0.18-1_all.deb
-sudo dpkg -i libgtk2-ex-simple-list-perl_0.50-2_all.deb
-sudo dpkg -i libgtkimageview0_1.6.4+dfsg-2_amd64.deb
-rm -f libgdal1-dev_1.9.0-3.1ubuntu4_all.deb
-rm -f libgoocanvas-common_1.0.0-1_all.deb
-rm -f libgoocanvas3_1.0.0-1_amd64.deb
-rm -f libgtk2-ex-podviewer-perl_0.18-1_all.deb
-rm -f libgtk2-ex-simple-list-perl_0.50-2_all.deb
-rm -f libgtkimageview0_1.6.4+dfsg-2_amd64.deb
+# wget http://launchpadlibrarian.net/146288726/libgdal1-dev_1.9.0-3.1ubuntu4_all.deb
+# wget http://launchpadlibrarian.net/226687719/libgoocanvas-common_1.0.0-1_all.deb
+# wget http://launchpadlibrarian.net/226687722/libgoocanvas3_1.0.0-1_amd64.deb
+# wget http://archive.ubuntu.com/ubuntu/pool/universe/libg/libgtk2-ex-podviewer-perl/libgtk2-ex-podviewer-perl_0.18-1_all.deb
+# wget http://archive.ubuntu.com/ubuntu/pool/universe/libg/libgtk2-ex-simple-list-perl/libgtk2-ex-simple-list-perl_0.50-2_all.deb
+# wget http://archive.ubuntu.com/ubuntu/pool/universe/g/gtkimageview/libgtkimageview0_1.6.4+dfsg-2_amd64.deb
+# sudo dpkg -i libgdal1-dev_1.9.0-3.1ubuntu4_all.deb
+# sudo dpkg -i libgoocanvas-common_1.0.0-1_all.deb
+# sudo dpkg -i libgoocanvas3_1.0.0-1_amd64.deb
+# sudo dpkg -i libgtk2-ex-podviewer-perl_0.18-1_all.deb
+# sudo dpkg -i libgtk2-ex-simple-list-perl_0.50-2_all.deb
+# sudo dpkg -i libgtkimageview0_1.6.4+dfsg-2_amd64.deb
+# rm -f libgdal1-dev_1.9.0-3.1ubuntu4_all.deb
+# rm -f libgoocanvas-common_1.0.0-1_all.deb
+# rm -f libgoocanvas3_1.0.0-1_amd64.deb
+# rm -f libgtk2-ex-podviewer-perl_0.18-1_all.deb
+# rm -f libgtk2-ex-simple-list-perl_0.50-2_all.deb
+# rm -f libgtkimageview0_1.6.4+dfsg-2_amd64.deb
 
 # STEP 7: INSTALL THE 'cpanminus' SCRIPT, THEN USE IT TO INSTALL VARIOUS ADDITIONAL PERL MODULES
 
