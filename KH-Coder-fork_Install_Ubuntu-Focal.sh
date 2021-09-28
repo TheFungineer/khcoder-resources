@@ -38,7 +38,7 @@ echo $'Enter your system password when prompted below. \nYou will not see any ch
 
 sudo apt -y install perl perl-base perl-modules-5.30 perl-tk perl-doc
 
-# STEP 2: INSTALL DEPENDENCIES FOR GNU R, THEN ADD A REPOSITORY WITH THE LATEST VERSION, AND FINALLY INSTALL R WITH -DEV PACKAGES
+# STEP 2: INSTALL DEPENDENCIES FOR GNU R, THEN ADD A REPOSITORY WITH THE LATEST VERSION, AND FINALLY INSTALL R WITH -DEV FILES
 
 sudo apt -y install dirmngr gnupg apt-transport-https ca-certificates software-properties-common wget
 wget -qO- https://cloud.r-project.org/bin/linux/ubuntu/marutter_pubkey.asc | sudo tee -a /etc/apt/trusted.gpg.d/cran_ubuntu_key.asc
@@ -60,9 +60,9 @@ sudo mysql -e "ALTER USER 'root'@'localhost' IDENTIFIED BY '$PASSWORD';"     # T
 declare file="/etc/mysql/mysql.cnf"
 declare regex="\s+sql_mode\s+"
 declare file_content=$( cat "${file}" )
-if [[ " $file_content " =~ $regex ]] # please note the space before and after the file content
+if [[ " $file_content " =~ $regex ]]                                         # Note the spaces before and after the $file_content variable.
 then
-    echo "Skipping setting mysql.cnf"
+    echo "Skipping setting up 'mysql.cnf'..."
 else
     echo "" | sudo tee -a /etc/mysql/mysql.cnf
     echo "[mysqld]" | sudo tee -a /etc/mysql/mysql.cnf
