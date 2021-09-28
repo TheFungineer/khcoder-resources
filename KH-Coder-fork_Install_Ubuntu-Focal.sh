@@ -56,6 +56,7 @@ sudo apt -y install default-mysql-client mysql-common mysql-server libmysqlclien
 sudo mysql -e "ALTER USER 'root'@'localhost' IDENTIFIED BY '$PASSWORD';"     # This will set the MySQL root password that was previously chosen.
 
 # STEP 4.2: SET APPROPRIATE GLOBAL SETTINGS FOR MYSQL
+
 declare file="/etc/mysql/mysql.cnf"
 declare regex="\s+sql_mode\s+"
 declare file_content=$( cat "${file}" )
