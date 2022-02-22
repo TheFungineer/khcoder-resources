@@ -1,8 +1,8 @@
 #!/bin/bash
 
-# This script will set up a global software environment for text mining on Ubuntu 20.04 and derivatives;
-# what will be installed includes everything necessary for Prof. Koichi Higuchi's KH Coder (specifically  
-# the fork created by this script's authors) to function, and quite a bit more. It will also preconfigure
+# This script will set up a global software environment for text mining on Ubuntu 20.04 and derivatives; 
+# what will be installed includes everything necessary for Prof. Koichi Higuchi's KH Coder (specifically 
+# the fork created by this script's authors) to function, and quite a bit more. It will also preconfigure 
 # KH Coder for English-language text mining and install pretty fonts for use with it.
 # 
 # Copyright 2021 David-O. Mercier and Simon R.-Girard
@@ -21,14 +21,16 @@
 
 # PREPARATORY STEP A: DEFINE THE $PATH_KHC VARIABLE
 
+echo $'\n'
 read -e -p "Enter the path to the directory where you wish to install KH Coder`echo $'\n(default is ~/Downloads): '`" -i "$HOME/Downloads" PATH_KHC
 echo KH Coder will be installed in: $PATH_KHC
 mkdir -p $PATH_KHC
 
 # PREPARATORY STEP B: DEFINE THE $PASSWORD VARIABLE
 
-read -e -p "Enter your chosen password for the MySQL administrator (root) account: " PASSWORD
-echo The MySQL root password will be: $PASSWORD
+echo $'\n'
+read -e -p "Enter your chosen password for the MySQL administrator account (this should ideally be different from your system's root password): " PASSWORD
+echo The MySQL administrator password will be: $PASSWORD
 
 echo $'\n*** The installation process will now begin... ***\n'
 
@@ -209,6 +211,6 @@ rm -f stanford-postagger-2016-10-31.zip
 export DBUSER=root DBPASSWORD=$PASSWORD PATH_KHC=$PATH_KHC
 sed "s|%%DB_USER%%|$DBUSER|g;s|%%DB_PASSWORD%%|$DBPASSWORD|g;s|%%PATH_KHC%%|$PATH_KHC|g" $PATH_KHC/khcoder/config/coder.ini.template.en > $PATH_KHC/khcoder/config/coder.ini
 
-cd khcoder
-
-echo $'\n*** Installation complete! ***\n\nYou may now launch KH Coder with the command "sudo perl kh_coder.pl". \n(You must be in KH Coder\'s installation directory, as you are now.)\n'
+echo $'\n*** Installation complete! ***\n'
+echo You may now move to KH Coder\'s installation directory with the command \"cd $PATH_KHC/khcoder\", then launch the program with the command \"sudo perl kh_coder.pl\".
+echo $'\n'
