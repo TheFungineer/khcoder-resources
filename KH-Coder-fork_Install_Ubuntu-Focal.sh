@@ -22,12 +22,11 @@
 if [ $EUID -ne 0 ]; then
     echo "This script must be run as superuser: sudo ./KH-Coder-fork_Install_Ubuntu-Focal.sh"
     exit 1
-done
+fi
 
 # PREPARATORY STEP A: DEFINE THE $PATH_KHC VARIABLE
-
 echo $'\n'
-read -e -p "Enter the path to the directory where you wish to install KH Coder`echo $'\n(default is ~/Downloads): '`" -i "$HOME/Downloads" PATH_KHC
+read -e -p "Enter the path to the directory where you wish to install KH Coder`echo $'\n(default is ~/Downloads): '`" -i "/home/$SUDO_USER/Downloads" PATH_KHC
 echo KH Coder will be installed in: $PATH_KHC
 sudo -u $SUDO_USER mkdir -p $PATH_KHC
 
@@ -47,7 +46,7 @@ apt -y install perl perl-base perl-modules-5.30 perl-tk perl-doc
 
 # STEP 2: INSTALL DEPENDENCIES FOR GNU R, THEN ADD A REPOSITORY WITH THE LATEST VERSION, AND FINALLY INSTALL R WITH -DEV FILES
 
-apt -y install dirmngr gnupg apt-transport-https ca-certificates software-properties-common wget
+apt -y install cmake dirmngr gnupg apt-transport-https ca-certificates software-properties-common wget
 wget -qO- https://cloud.r-project.org/bin/linux/ubuntu/marutter_pubkey.asc | tee -a /etc/apt/trusted.gpg.d/cran_ubuntu_key.asc
 add-apt-repository -y 'deb https://cloud.r-project.org/bin/linux/ubuntu focal-cran40/'
 apt -y install r-base r-base-dev
@@ -55,7 +54,7 @@ apt -y install r-base r-base-dev
 # STEP 3: INSTALL JAVA 8 (OPENJDK) AND SET APPROPRIATE JAVA OPTIONS
 
 apt -y install openjdk-8-jdk openjdk-8-jdk-headless openjdk-8-jre openjdk-8-jre-headless
-echo "export _JAVA_OPTIONS=\"-Xmx4g\"" >> $HOME/.bashrc
+echo "export _JAVA_OPTIONS=\"-Xmx4g\"" | sudo -u $SUDO_USER tee -a /home/$SUDO_USER/.bashrc
 
 # STEP 4.1: INSTALL THE MYSQL SERVER AND CLIENT, THEN SET THE MYSQL ROOT PASSWORD
 
@@ -82,7 +81,7 @@ fi
 
 # This will download a preconfigured 'mysqld.cnf' file with increased memory values and use it to overwrite the default configuration file.
 
-cd $HOME/                                                                        # Just in case you're not already in your home directory.
+cd /home/$SUDO_USER                                                                        # Just in case you're not already in your home directory.
 wget https://raw.githubusercontent.com/TheFungineer/khcoder-resources/main/mysqld.cnf
 cp mysqld.cnf /etc/mysql/mysql.conf.d/mysqld.cnf
 rm -f mysqld.cnf
@@ -176,7 +175,7 @@ R -e "require(devtools); install_version(\"ggplot2\", version = \"3.2.1\", repos
 
 # STEP 10: DOWNLOAD THE 'Source Sans Pro' FONT SUITE AND INSTALL IT
 
-cd $HOME/
+cd /home/$SUDO_USER
 wget https://fonts.google.com/download?family=Source%20Sans%20Pro -O SourceSansPro.zip
 unzip SourceSansPro.zip
 rm -f SourceSansPro.zip
