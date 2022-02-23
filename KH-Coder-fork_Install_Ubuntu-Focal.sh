@@ -38,8 +38,6 @@ echo The MySQL administrator password will be: $PASSWORD
 
 echo $'\n*** The installation process will now begin... ***\n'
 
-echo $'Enter your system password when prompted below. \nYou will not see any characters appear as you write.\n'
-
 # STEP 1: INSTALL PERL & BASIC ADD-ONS
 
 apt -y install perl perl-base perl-modules-5.30 perl-tk perl-doc
