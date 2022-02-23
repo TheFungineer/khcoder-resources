@@ -26,7 +26,8 @@ fi
 
 # PREPARATORY STEP A: DEFINE THE $PATH_KHC VARIABLE
 echo $'\n'
-read -e -p "Enter the path to the directory where you wish to install KH Coder`echo $'\n(default is ~/Downloads): '`" -i "/home/$SUDO_USER/Downloads" PATH_KHC
+read -e -p "Enter the path from your home folder where you wish to install KH Coder`echo $'\n(default is ~/Downloads): '`" -i "Downloads" PATH_KHC
+PATH_KHC=/home/$SUDO_USER/$PATH_KHC
 echo KH Coder will be installed in: $PATH_KHC
 sudo -u $SUDO_USER mkdir -p $PATH_KHC
 
