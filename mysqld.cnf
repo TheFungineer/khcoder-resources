@@ -57,8 +57,8 @@ back_log                        = 1024
 thread_cache_size               = 500
 thread_stack                    = 384K
 
-interactive_timeout             = 7200
-wait_timeout                    = 7200
+interactive_timeout             = 345600
+wait_timeout                    = 345600
 
 # For MySQL 5.7+ only (disabled by default)
 #max_execution_time             = 30000 # Set a timeout limit for SELECT statements (value in milliseconds).
