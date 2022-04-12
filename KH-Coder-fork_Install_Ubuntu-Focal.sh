@@ -26,6 +26,17 @@ if [ $EUID -ne 0 ]; then
     exit 1
 fi
 
+# INTERMISSION: WARNING REGARDING THE DURATION OF THE PROCESS
+
+echo $'\n'
+read -p "This process will likely take many hours to reach completion. Write 'y' to continue: " -n 1 -r
+if [[ ! $REPLY =~ ^[Yy]$ ]]
+then
+    echo $'\n'
+    echo Exiting.
+    [[ "$0" = "$BASH_SOURCE" ]] && exit 1 || return 1
+fi
+
 # PREPARATORY STEP B: DEFINE THE $PATH_KHC VARIABLE
 
 echo $'\n'
