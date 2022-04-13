@@ -22,19 +22,10 @@
 # PREPARATORY STEP A: CHECK WHETHER OR NOT THE SCRIPT IS BEING RUN WITH THE REQUIRED SUPERUSER PRIVILEGES
 
 if [ $EUID -ne 0 ]; then
-    echo $'This script must be run as superuser: \nsudo ./KH-Coder-fork_Install_Ubuntu-Focal.sh'
-    exit 1
-fi
-
-# INTERMISSION: WARNING REGARDING THE DURATION OF THE PROCESS
-
-echo $'\n'
-read -p "This process will likely take many hours to reach completion. Write 'y' to continue: " -n 1 -r
-if [[ ! $REPLY =~ ^[Yy]$ ]]
-then
     echo $'\n'
-    echo Exiting.
-    [[ "$0" = "$BASH_SOURCE" ]] && exit 1 || return 1
+    echo $'This script must be run as superuser: \nsudo ./KH-Coder-fork_Install_Ubuntu-Focal.sh'
+    echo $'\n'
+    exit 1
 fi
 
 # PREPARATORY STEP B: DEFINE THE $PATH_KHC VARIABLE
@@ -50,6 +41,18 @@ sudo -u $SUDO_USER mkdir -p $PATH_KHC
 echo $'\n'
 read -e -p "Enter your chosen password for the MySQL administrator account (this should ideally be different from your system's root password): " PASSWORD
 echo The MySQL administrator password will be: $PASSWORD
+
+# INTERMISSION: WARNING REGARDING THE DURATION OF THE PROCESS
+
+echo $'\n'
+read -p "This process will likely take many hours to reach completion. Write 'y' to continue: " -n 1 -r
+if [[ ! $REPLY =~ ^[Yy]$ ]]
+then
+    echo $'\n'
+    echo Exiting.
+    echo $'\n'
+    [[ "$0" = "$BASH_SOURCE" ]] && exit 1 || return 1
+fi
 
 echo $'\n*** THE INSTALLATION WILL NOW BEGIN... ***'
 echo $'\n*** Avoid interacting with the terminal during the process. ***\n'
