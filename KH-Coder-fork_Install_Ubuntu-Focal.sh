@@ -193,6 +193,7 @@ R -e "require(devtools); install_version(\"igraph\", version = \"0.7.1\", repos 
 R -e "require(devtools); install_version(\"rgeos\", version = \"0.3-28\", repos = \"http://cran.us.r-project.org\")"
 R -e "require(devtools); install_version(\"wordcloud\", version = \"2.4\", repos = \"http://cran.us.r-project.org\")"
 R -e "require(devtools); install_version(\"ggplot2\", version = \"3.2.1\", repos = \"http://cran.us.r-project.org\")"
+R -e "require(devtools); install_version(\"ggnetwork\", version = \"0.5.1\", repos = \"http://cran.us.r-project.org\")"
 
 # STEP 10: DOWNLOAD THE 'Source Sans Pro' FONT SUITE AND INSTALL IT
 
